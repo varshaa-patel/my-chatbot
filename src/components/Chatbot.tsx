@@ -8,6 +8,7 @@ import { MessageArea } from "./MessageArea";
 import { InputArea } from "./InputArea";
 import { useChatLogic } from "../hooks/useChatLogic";
 import { ChatbotProps } from "../types";
+import { BroadcastService } from "@/services/BroadcastService";
 
 export const Chatbot: React.FC<ChatbotProps> = ({
   config = {
@@ -27,6 +28,8 @@ export const Chatbot: React.FC<ChatbotProps> = ({
   fingerprint = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const {
     messages,
     handleSend,
@@ -52,6 +55,13 @@ export const Chatbot: React.FC<ChatbotProps> = ({
       setIsOpen(false);
     }
   };
+  useEffect(() => {
+    BroadcastService.sendLoadingState(isLoading || isTyping);
+  }, [isLoading, isTyping]);
+  useEffect(() => {
+    BroadcastService.onLoadingState(setIsDisabled);
+  }, []);
+ 
 
   const handleEndChat = () => {
     endChat();
