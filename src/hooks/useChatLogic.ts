@@ -40,12 +40,12 @@ export const useChatLogic = (
         setConversationId(data.conversation_id);
         localStorage.setItem("conversation-id", data.conversation_id);
       }
-      startHeartbeat({
-        heartbeatInterval: config?.heartbeatInterval,
-      });
-      resetInactivityTimer({
-        inactivityLimit: config?.inactivityLimit,
-      });
+      // startHeartbeat({
+      //   heartbeatInterval: config?.heartbeatInterval,
+      // });
+      // resetInactivityTimer({
+      //   inactivityLimit: config?.inactivityLimit,
+      // });
     } else {
       setMessages([{ role: "bot", content: "Bot did not respond." }]);
     }

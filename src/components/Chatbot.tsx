@@ -14,7 +14,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({
   config = {
     title: "",
     delay: 10,
-    heartbeatInterval: 20,
+    heartbeatInterval: 1,
     inactivityLimit: 60,
   },
   language = "en-US",

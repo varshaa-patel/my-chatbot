@@ -4,6 +4,7 @@ import { Chatbot } from '../components/Chatbot';
 import chatbotStyles from '../components/Chatbot.css';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { fetchChatbotConfig } from '../services/chatbotConfigService';
+import {  initHeartbeatControl } from '@/services/hearbeat';
 
 // Register the Web Component
 class WebComponent extends HTMLElement {
@@ -25,7 +26,7 @@ class WebComponent extends HTMLElement {
 
         const link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('href', 'http://localhost:3000/index.css'); // Path from the 'public' folder
+        link.setAttribute('href', 'http://localhost:5000/index.css'); // Path from the 'public' folder
         shadow.appendChild(link);
 
         let config = await fetchChatbotConfig();
@@ -40,7 +41,12 @@ class WebComponent extends HTMLElement {
 if (!customElements.get('my-chatbot')) {
     customElements.define('my-chatbot', WebComponent);
 }
-
+initHeartbeatControl({
+    heartbeatInterval: 2, // seconds
+    inactivityLimit: 20,   // seconds
+    userId: 'abc123',
+    sessionId: 'xyz456',
+  });
 const allowedOrigins = [
     'https://yourmainsite.com',
     'https://app.yourmainsite.com',
