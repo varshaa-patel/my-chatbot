@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["www.qatarairways.com", "www.goindigo.in"], // ✅ Replace with the actual domain(s) hosting your images
+  },
 };
 
 export default nextConfig;

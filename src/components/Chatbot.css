@@ -1,0 +1,226 @@
+/* Chatbot.tsx */
+.chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  width: 100%;
+  max-width: 400px;
+  height: 80vh;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/*FloatingButton.tsx*/
+
+.floating-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #5cd1ca;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: width 0.3s, height 0.3s, font-size 0.3s;
+}
+
+/*ChatHeader.tsx*/
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #5cd1ca;
+  color: #fff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-size: 16px;
+}
+
+.chat-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/*MessageArea.tsx*/
+
+.message-area {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  white-space: pre-wrap;
+  transition: padding 0.3s ease-in-out;
+}
+
+.message-area .empty-state {
+  color: #666;
+}
+
+.message-wrapper {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.message-wrapper.user {
+  justify-content: flex-end;
+}
+
+.message-wrapper.bot {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  padding: 8px 12px;
+  border-radius: 16px;
+  max-width: 70%;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  transition: all 0.3s ease-in-out;
+}
+
+.message-bubble.user {
+  background-color: #5cd1ca;
+  color: #fff;
+}
+
+.message-bubble.bot {
+  background-color: #f1f0f0;
+  color: #000;
+}
+
+.message-content {
+  margin-top: 4px;
+}
+
+/*InputArea.tsx*/
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transition: padding 0.3s ease-in-out;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  min-width: 100px;
+  max-width: calc(100% - 80px);
+  transition: width 0.3s;
+}
+
+.input-area button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: #5cd1ca;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.input-area button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/*FlightCards.tsx*/
+
+.flight-cards {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: sans-serif;
+}
+
+.flight-cards p:first-child {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.flight-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.flight-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flight-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flight-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.flight-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.flight-info p {
+  margin: 2px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.flight-logo {
+  height: 32px;
+  object-fit: contain;
+}
+
+.flight-details p {
+  margin: 2px 0;
+  font-size: 0.95rem;
+}
+
+.flight-price {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
