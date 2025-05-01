@@ -20,6 +20,8 @@ export const useChatLogic = (
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [lastPrompt, setLastPrompt] = useState<string | null>(null);
+  const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {
     const storedConversationId = localStorage.getItem("conversation-id");
@@ -56,12 +58,15 @@ export const useChatLogic = (
       setIsTyping(true);
       setIsLoading(true);
       setMessages([{ role: "bot", content: "...", loading: true }]);
-      const data = await callStartAPIService({
-        language,
-        location,
-        timezone,
-        fingerprint,
-      });
+      const data = await callStartAPIService(
+        {
+          language,
+          location,
+          timezone,
+          fingerprint,
+        },
+        config?.timeout
+      );
       handleBotResponse(data);
     } catch (error) {
       console.error("Start API call failed:", error);
@@ -71,33 +76,51 @@ export const useChatLogic = (
     }
   };
 
-  const handleSend = async (message: string) => {
+  const handleSend = async (message: string, isRetry = false) => {
     if (!message.trim() || isLoading || isTyping) return;
-    setMessages((prev) => [...prev, { role: "user", content: message }]);
+    setLastPrompt(message);
+    // Only add user message if it's not a retry
+    if (!isRetry) {
+      setMessages((prev) => [...prev, { role: "user", content: message }]);
+    }
 
     try {
       setIsTyping(true);
       setIsLoading(true);
+      setTimedOut(false);
       setMessages((prev) => [
         ...prev,
         { role: "bot", content: "...", loading: true },
       ]);
       const data = conversationId
-        ? await callChatAPIService({ message, conversationId, fingerprint })
-        : await callStartAPIService({
-            initialMessage: message,
-            language,
-            location,
-            timezone,
-            fingerprint,
-          });
+        ? await callChatAPIService(
+            { message, conversationId, fingerprint },
+            config?.timeout
+          )
+        : await callStartAPIService(
+            {
+              initialMessage: message,
+              language,
+              location,
+              timezone,
+              fingerprint,
+            },
+            config?.timeout
+          );
       handleBotResponse(data);
     } catch (error) {
       console.error("Chat API call failed:", error);
-      setMessages((prev) => [
-        ...prev.slice(0, -1),
-        { role: "bot", content: "Network error. Try again later." },
-      ]);
+      if (error instanceof Error && error.message === "timeout") {
+        setTimedOut(true);
+        setIsTyping(false);
+        setMessages((prev) => [...prev.slice(0, -1)]); // Remove loader
+      } else {
+        setIsTyping(false);
+        setMessages((prev) => [
+          ...prev.slice(0, -1),
+          { role: "bot", content: "Network error. Try again later." },
+        ]);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -117,11 +140,17 @@ export const useChatLogic = (
     }
   };
 
+  const retryPrompt = async () => {
+    if (!lastPrompt) return;
+    await handleSend(lastPrompt, true);
+  };
+
   const endChat = () => {
     setMessages([]);
     setConversationId(null);
     setIsTyping(false);
     setIsLoading(false);
+    setLastPrompt(null);
     localStorage.removeItem("conversation-id");
   };
 
@@ -133,5 +162,7 @@ export const useChatLogic = (
     isTyping,
     isLoading,
     restorePreviousConversation,
+    retryPrompt,
+    timedOut,
   };
 };

@@ -15,6 +15,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({
     delay: 10,
     heartbeatInterval: 20,
     inactivityLimit: 60,
+    timeout: 30,
   },
   language = "en-US",
   location = {
@@ -34,13 +35,15 @@ export const Chatbot: React.FC<ChatbotProps> = ({
     isTyping,
     isLoading,
     restorePreviousConversation,
+    retryPrompt,
+    timedOut,
   } = useChatLogic(language, location, timezone, config, fingerprint);
 
   // Automatically open if conversation exists
   useEffect(() => {
     const existingConversationId = localStorage.getItem("conversation-id");
     if (existingConversationId) {
-      setIsOpen(true);
+      // setIsOpen(true);
       restorePreviousConversation(existingConversationId);
     }
   }, []);
@@ -65,7 +68,12 @@ export const Chatbot: React.FC<ChatbotProps> = ({
       {isOpen && (
         <div className="chatbot-container">
           <ChatHeader onEndChat={handleEndChat} />
-          <MessageArea messages={messages} onSend={handleSend} />
+          <MessageArea
+            messages={messages}
+            onSend={handleSend}
+            retryPrompt={retryPrompt}
+            timedOut={timedOut}
+          />
           <InputArea onSend={handleSend} disabled={isLoading || isTyping} />
         </div>
       )}

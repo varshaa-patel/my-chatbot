@@ -10,6 +10,7 @@ export const fetchChatbotConfig = async () => {
       delay: 10,
       heartbeatInterval: 20,
       inactivityLimit: 60,
+      timeout: 30,
     };
   } catch (error) {
     console.warn(
@@ -21,6 +22,7 @@ export const fetchChatbotConfig = async () => {
       delay: 10,
       heartbeatInterval: 20,
       inactivityLimit: 60,
+      timeout: 30,
     };
   }
 };

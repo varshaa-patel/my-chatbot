@@ -5,6 +5,8 @@ import { FlightCards } from "./FlightCards";
 export const MessageArea: React.FC<MessageAreaProps> = ({
   messages,
   onSend,
+  retryPrompt,
+  timedOut,
 }) => {
   const [dotCount, setDotCount] = useState(1);
 
@@ -60,6 +62,14 @@ export const MessageArea: React.FC<MessageAreaProps> = ({
         ))
         // )
       }
+      {timedOut && (
+        <div className="timeout-error-container">
+          <p className="error-text">The request timed out.</p>
+          <button onClick={retryPrompt} className="retry-button">
+            Retry
+          </button>
+        </div>
+      )}
     </div>
   );
 };

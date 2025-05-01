@@ -1,51 +1,62 @@
 import { ChatRequestParams } from "../types";
+import { fetchWithTimeout } from "./timeout";
 
 const API_BASE = "http://localhost:8000/api/v1/new";
 
-export const callStartAPIService = async ({
-  initialMessage = "Hello",
-  language,
-  location,
-  timezone,
-  fingerprint,
-}: ChatRequestParams) => {
-  const response = await fetch(`${API_BASE}/start`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+export const callStartAPIService = async (
+  {
+    initialMessage = "Hello",
+    language,
+    location,
+    timezone,
+    fingerprint,
+  }: ChatRequestParams,
+  timeout = 30
+) => {
+  const response = await fetchWithTimeout(
+    `${API_BASE}/start`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        role: "user",
+        initial_message: initialMessage,
+        language,
+        location,
+        timezone,
+        fingerprint,
+      }),
     },
-    body: JSON.stringify({
-      role: "user",
-      initial_message: initialMessage,
-      language,
-      location,
-      timezone,
-      fingerprint,
-    }),
-  });
+    timeout
+  );
 
   if (!response.ok) throw new Error("Start API failed");
 
   return await response.json();
 };
 
-export const callChatAPIService = async ({
-  message,
-  conversationId,
-  fingerprint,
-}: ChatRequestParams) => {
-  const response = await fetch(`${API_BASE}/chat`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+export const callChatAPIService = async (
+  { message, conversationId, fingerprint }: ChatRequestParams,
+  timeout = 30
+) => {
+  const response = await fetchWithTimeout(
+    `${API_BASE}/chat`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        role: "user",
+        message,
+        conversation_id: conversationId,
+        fingerprint,
+      }),
     },
-    body: JSON.stringify({
-      role: "user",
-      message,
-      conversation_id: conversationId,
-      fingerprint,
-    }),
-  });
+    timeout
+  );
 
   if (!response.ok) throw new Error("Chat API failed");
 

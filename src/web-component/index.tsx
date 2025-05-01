@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Chatbot } from "../components/Chatbot";
 import chatbotStyles from "../components/Chatbot.css";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
-import { fetchChatbotConfig } from "../services/chatbotConfigService";
+import { fetchChatbotConfig } from "../services/chatbotConfig";
 
 // Register the Web Component
 class WebComponent extends HTMLElement {

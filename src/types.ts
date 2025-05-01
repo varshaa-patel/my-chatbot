@@ -5,6 +5,7 @@ export interface Config {
   delay?: number;
   heartbeatInterval: number;
   inactivityLimit: number;
+  timeout?: number;
 }
 
 export interface Location {
@@ -52,6 +53,8 @@ export interface MessageAreaProps {
     loading?: boolean;
   }[];
   onSend: (msg: string) => void;
+  retryPrompt: () => void;
+  timedOut: boolean;
 }
 
 export interface Flight {
@@ -89,4 +92,5 @@ export interface ChatRequestParams {
   location?: Location;
   timezone?: string;
   fingerprint: string;
+  timeout?: number;
 }

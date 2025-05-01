@@ -115,6 +115,51 @@
   margin-top: 4px;
 }
 
+.timeout-error-container {
+  display: flex;
+  flex-direction: row; /* ← changed from column */
+  align-items: center;
+  justify-content: center;
+  background-color: #fff3f3;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 8px 8px;
+  margin: 10px 20px;
+  gap: 12px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-text {
+  color: #dc2626; /* Tailwind's red-600 */
+  margin: 0;
+  font-size: 14px;
+}
+
+.retry-button {
+  background-color: #ef4444; /* Tailwind's red-500 */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.retry-button:hover {
+  background-color: #dc2626; /* red-600 */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /*InputArea.tsx*/
 
 .input-area {
