@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:wc": "tsup"
+    "reveal": "tsup"
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^4.6.2",

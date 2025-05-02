@@ -2,7 +2,7 @@
 
 export interface Config {
   title?: string;
-  delay?: number;
+  typingDelay?: number;
   heartbeatInterval: number;
   inactivityLimit: number;
   timeout?: number;
