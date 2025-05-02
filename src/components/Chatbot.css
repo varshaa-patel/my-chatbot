@@ -200,6 +200,16 @@
   opacity: 0.6;
 }
 
+.chat-input button {
+  background: #f3f3f3;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
 /*FlightCards.tsx*/
 
 .flight-cards {

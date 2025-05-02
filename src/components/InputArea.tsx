@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { InputAreaProps } from "../types";
+import { useVoiceToText } from "../hooks/useVoiceToText";
 
 export const InputArea: React.FC<InputAreaProps> = ({ onSend, disabled }) => {
   const [message, setMessage] = useState("");
+
+  const { isRecording, startRecording, stopRecording } = useVoiceToText(
+    (transcript) => {
+      // onSend(transcript); // Send the transcript as prompt
+      setMessage(transcript);
+    }
+  );
 
   const handleSendClick = () => {
     if (message.trim()) {
@@ -30,6 +38,15 @@ export const InputArea: React.FC<InputAreaProps> = ({ onSend, disabled }) => {
       <button onClick={handleSendClick} disabled={disabled || !message.trim()}>
         Send
       </button>
+      <div className="chat-input">
+        <button
+          onClick={isRecording ? stopRecording : startRecording}
+          style={{ color: isRecording ? "#ff0000" : "#000000" }}
+          disabled={disabled}
+        >
+          {isRecording ? "Stop" : "🎤"}
+        </button>
+      </div>
     </div>
   );
 };

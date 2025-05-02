@@ -65,13 +65,17 @@ export const callChatAPIService = async (
 
 export const fetchPreviousChats = async (conversationId: string) => {
   try {
-    const response = await fetch(`${API_BASE}/history`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ conversation_id: conversationId }),
-    });
+    const response = await fetch(
+      `${API_BASE}/history?conversation_id=${encodeURIComponent(
+        conversationId
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await response.json();
     if (data?.messages) {

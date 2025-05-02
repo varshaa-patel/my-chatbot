@@ -1,4 +1,4 @@
-// src/utils/simulateTypingEffect.ts
+// src/services/simulateTypingEffect.ts
 import { Dispatch, SetStateAction } from "react";
 import { Message } from "../types";
 
@@ -9,7 +9,7 @@ export const simulateTypingEffect = (
   response: string,
   setMessages: Dispatch<SetStateAction<Message[]>>,
   onComplete?: () => void,
-  delay?: number
+  typingDelay?: number
 ) => {
   let index = 0;
   const typingInterval = setInterval(() => {
@@ -25,5 +25,5 @@ export const simulateTypingEffect = (
       clearInterval(typingInterval); // Stop the typing effect when done
       onComplete?.(); // Call optional completion callback
     }
-  }, delay);
+  }, typingDelay);
 };
