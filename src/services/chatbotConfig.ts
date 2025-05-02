@@ -7,7 +7,7 @@ export const fetchChatbotConfig = async () => {
 
     return {
       ...config,
-      delay: 10,
+      typingDelay: 10,
       heartbeatInterval: 20,
       inactivityLimit: 60,
       timeout: 30,
@@ -19,7 +19,7 @@ export const fetchChatbotConfig = async () => {
     );
     return {
       title: "",
-      delay: 10,
+      typingDelay: 10,
       heartbeatInterval: 20,
       inactivityLimit: 60,
       timeout: 30,
