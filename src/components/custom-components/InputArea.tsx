@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { InputAreaProps } from "../types";
-import { useVoiceToText } from "../hooks/useVoiceToText";
+import { InputAreaProps } from "../../types";
+import { useVoiceToText } from "../../hooks/useVoiceToText";
 
 export const InputArea: React.FC<InputAreaProps> = ({ onSend, disabled }) => {
   const [message, setMessage] = useState("");

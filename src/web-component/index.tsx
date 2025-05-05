@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import { Chatbot } from "../components/Chatbot";
-import chatbotStyles from "../components/Chatbot.css";
+import { Chatbot } from "../components/custom-components/Chatbot";
+import chatbotStyles from "../components/custom-components/Chatbot.css";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import { fetchChatbotConfig } from "../services/chatbotConfig";
 import { initHeartbeatControl } from "@/services/hearbeat";

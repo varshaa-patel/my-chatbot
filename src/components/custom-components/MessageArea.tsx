@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Flight, MessageAreaProps } from "../types";
+import { Flight, MessageAreaProps } from "../../types";
 import { FlightCards } from "./FlightCards";
 
 export const MessageArea: React.FC<MessageAreaProps> = ({

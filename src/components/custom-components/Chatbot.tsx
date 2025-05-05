@@ -6,8 +6,8 @@ import { FloatingButton } from "./FloatingButton";
 import { ChatHeader } from "./ChatHeader";
 import { MessageArea } from "./MessageArea";
 import { InputArea } from "./InputArea";
-import { useChatLogic } from "../hooks/useChatLogic";
-import { ChatbotProps } from "../types";
+import { useChatLogic } from "../../hooks/useChatLogic";
+import { ChatbotProps } from "../../types";
 
 export const Chatbot: React.FC<ChatbotProps> = ({
   config = {

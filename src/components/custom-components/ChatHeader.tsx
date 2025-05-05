@@ -1,6 +1,6 @@
 // src/components/ChatHeader.tsx
 import React from "react";
-import { ChatHeaderProps } from "../types";
+import { ChatHeaderProps } from "../../types";
 
 export const ChatHeader: React.FC<ChatHeaderProps> = ({ onEndChat }) => {
   return (
