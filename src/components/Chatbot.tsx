@@ -66,7 +66,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({
       <FloatingButton onClick={toggleChat} />
 
       {isOpen && (
-        <div className="chatbot-container">
+        <div className="fixed bottom-[90px] right-6 w-full max-w-[400px] h-[80vh] bg-white text-black border border-gray-300 rounded-xl shadow-lg z-[1000] overflow-hidden flex flex-col p-2">
           <ChatHeader onEndChat={handleEndChat} />
           <MessageArea
             messages={messages}

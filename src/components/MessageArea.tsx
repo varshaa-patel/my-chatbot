@@ -20,13 +20,13 @@ export const MessageArea: React.FC<MessageAreaProps> = ({
 
   const handleSelectFlight = (flight: Flight) => {
     const flightSummary = `Selected flight: ${flight?.airline} ${flight.flight_number}, from ${flight?.departure?.airport} to ${flight?.arrival?.airport}, departs at ${flight?.departure?.time}`;
-    onSend(flightSummary); // Send as user's next prompt
+    onSend(flightSummary); 
   };
 
   return (
     <div className="message-area">
       <div className="message-bubble bot">
-        <div className="message-content">
+        <div className="">
           Hello! 🌟 How can I assist you today?
         </div>
       </div>
